@@ -2,7 +2,9 @@ package com.example.loginsignupsystem.model;
 
 import android.content.Context;
 
-public class Tour {
+import java.io.Serializable;
+
+public class Tour implements Serializable {
     private int id;
     private String title;
     private String subTitle;
