@@ -2,6 +2,7 @@ package com.example.loginsignupsystem.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -28,8 +29,12 @@ public class TourListActivity extends AppCompatActivity {
         // Find the ListView by its ID
         listView = findViewById(R.id.tourListView);
 
-        // Get all tours from the database
-        List<Tour> tours = tourDao.getAllTours();
+        // Get the category from the intent
+        Intent intent = getIntent();
+        String category = intent.getStringExtra("category");
+
+        // Get tours from the database by category
+        List<Tour> tours = tourDao.getToursByCategory(category);
 
         // Create a custom adapter to display each tour in the ListView
         TourListAdapter adapter = new TourListAdapter(this, tours);

@@ -9,6 +9,9 @@ public interface TourDao {
     // This method is used to get all tours from the database
     List<Tour> getAllTours();
 
+    // Get tours by category
+    List<Tour> getToursByCategory(String category);
+
     // This method is used to get a tour by its id
     Tour getTourById(int id);
 

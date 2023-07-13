@@ -59,7 +59,7 @@ public class TourListAdapter extends ArrayAdapter<Tour> {
         viewHolder.imageView.setImageDrawable(ContextCompat.getDrawable(context, tour.getImageResourceId(context)));
 
         viewHolder.titleView.setText(tour.getTitle());
-        viewHolder.subtitleView.setText(tour.getTitle());
+        viewHolder.subtitleView.setText(tour.getSubTitle());
 
         // We set an OnClickListener on our button to handle the click event
         viewHolder.selectButton.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +79,7 @@ public class TourListAdapter extends ArrayAdapter<Tour> {
         public TextView subtitleView;
         ImageView imageView;
         TextView titleView;
-        TextView descriptionView;
+
         Button selectButton;
     }
 }

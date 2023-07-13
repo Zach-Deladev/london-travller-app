@@ -55,7 +55,7 @@ ImageView museums, landmarks, art, shopping;
         museums.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startTourListActivity("museum");
+                startTourListActivity("museums");
             }
         });
 
