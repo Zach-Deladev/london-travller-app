@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".controller.LoginActivity">
+
+  <!--Title-->
+  <TextView
+      android:id="@+id/textView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="122dp"
+      android:text="@string/welcome_to_my_app"
+      android:textColor="@color/white"
+      android:textSize="28sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <!--Successful sign up message-->
+  <TextView
+      android:id="@+id/successReg"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="104dp"
+      android:text=""
+      android:textColor="#5DE415"
+      android:textSize="18sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.501"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnRegisterLog" />
+
+  <!--Email field-->
+  <EditText
+      android:id="@+id/emailAddressLogin"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="60dp"
+      android:layout_marginEnd="19dp"
+      android:autofillHints="Enter your Email"
+      android:ems="10"
+      android:hint="@string/email_address"
+      android:inputType="textEmailAddress"
+      android:textColor="@color/white"
+      android:textColorHint="@color/white"
+      app:layout_constraintEnd_toEndOf="@+id/textView"
+      app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+  <!--Password field-->
+  <EditText
+      android:id="@+id/password"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:autofillHints=""
+      android:ems="10"
+      android:hint="@string/password"
+      android:inputType="textPassword"
+      android:textColor="@color/white"
+      android:textColorHint="@color/white"
+      app:layout_constraintStart_toStartOf="@+id/emailAddressLogin"
+      app:layout_constraintTop_toBottomOf="@+id/emailAddressLogin"
+      tools:ignore="LabelFor" />
+
+  <!--Login button-->
+  <Button
+      android:id="@+id/btnLogin"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="40dp"
+      android:layout_marginEnd="4dp"
+      android:text="@string/login"
+      app:layout_constraintEnd_toEndOf="@+id/btnRegisterLog"
+      app:layout_constraintTop_toBottomOf="@+id/password" />
+
+  <!--Signup button-->
+  <Button
+      android:id="@+id/btnRegisterLog"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:text="@string/signup"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+  <!--Login errors text-->
+  <TextView
+      android:id="@+id/loginErrors"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text=""
+      android:textColor="#F80707"
+      app:layout_constraintEnd_toStartOf="@+id/successReg"
+      app:layout_constraintStart_toStartOf="@+id/successReg"
+      app:layout_constraintTop_toBottomOf="@+id/successReg" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
