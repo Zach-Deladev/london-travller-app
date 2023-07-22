@@ -8,19 +8,21 @@
     tools:context=".controller.LoginActivity">
 
   <!--Title-->
+
+  <!--Successful sign up message-->
+
   <TextView
       android:id="@+id/textView"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginTop="122dp"
+      android:layout_marginTop="44dp"
       android:text="@string/welcome_to_my_app"
       android:textColor="@color/white"
       android:textSize="28sp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
-  <!--Successful sign up message-->
   <TextView
       android:id="@+id/successReg"
       android:layout_width="wrap_content"
@@ -97,6 +99,15 @@
       app:layout_constraintEnd_toStartOf="@+id/successReg"
       app:layout_constraintStart_toStartOf="@+id/successReg"
       app:layout_constraintTop_toBottomOf="@+id/successReg" />
+
+  <ImageView
+      android:id="@+id/imageView4"
+      android:layout_width="343dp"
+      android:layout_height="133dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:srcCompat="@drawable/travelers_logo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@
 
 package com.example.loginsignupsystem.model;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -42,7 +43,7 @@ public class BookingsDaoImp implements BookingsDao{
 
         if (cursor.moveToFirst()) {
             do {
-                Bookings booking = new Bookings(
+                @SuppressLint("Range") Bookings booking = new Bookings(
                         cursor.getInt(cursor.getColumnIndex(ID)),
                         cursor.getInt(cursor.getColumnIndex(USERID)),
                         cursor.getInt(cursor.getColumnIndex(REFERENCE)),
@@ -57,6 +58,7 @@ public class BookingsDaoImp implements BookingsDao{
         return bookings;
     }
 
+    @SuppressLint("Range")
     public Bookings getBookingById(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Bookings booking = null;
@@ -83,7 +85,7 @@ public class BookingsDaoImp implements BookingsDao{
 
         if (cursor.moveToFirst()) {
             do {
-                Bookings booking = new Bookings(
+                @SuppressLint("Range") Bookings booking = new Bookings(
                         cursor.getInt(cursor.getColumnIndex(ID)),
                         cursor.getInt(cursor.getColumnIndex(USERID)),
                         cursor.getInt(cursor.getColumnIndex(REFERENCE)),

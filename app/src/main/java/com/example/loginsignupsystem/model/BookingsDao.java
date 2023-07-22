@@ -8,7 +8,12 @@ import java.util.List;
 
 public interface BookingsDao {
 
+
+
     long addBooking(Bookings booking);
+
+
+
 
     Bookings getBookingById(int id);
 
