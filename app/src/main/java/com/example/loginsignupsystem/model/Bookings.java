@@ -9,9 +9,10 @@ public class Bookings {
     private String tour;
 
     // Constructor for creating new Booking
-    public Bookings(int userId, int reference, String tour) {
+    public Bookings(int userId, int reference, String date, String tour) {
         this.userId = userId;
         this.reference = reference;
+        this.date = date;
         this.tour = tour;
     }
 
@@ -24,6 +25,7 @@ public class Bookings {
         this.tour = tour;
     }
 
+    // Getter and Setter methods for id
     public int getId() {
         return id;
     }
@@ -32,6 +34,7 @@ public class Bookings {
         this.id = id;
     }
 
+    // Getter and Setter methods for userId
     public int getUserId() {
         return userId;
     }
@@ -40,6 +43,7 @@ public class Bookings {
         this.userId = userId;
     }
 
+    // Getter and Setter methods for reference
     public int getReference() {
         return reference;
     }
@@ -48,6 +52,7 @@ public class Bookings {
         this.reference = reference;
     }
 
+    // Getter and Setter methods for date
     public String getDate() {
         return date;
     }
@@ -56,6 +61,7 @@ public class Bookings {
         this.date = date;
     }
 
+    // Getter and Setter methods for tour
     public String getTour() {
         return tour;
     }
