@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment {
         tourListFragment.setArguments(bundle);
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, tourListFragment);
-        transaction.addToBackStack(null);  // if you want to add this transaction to backstack
+        transaction.addToBackStack(null);
         transaction.commit();
     }
 }

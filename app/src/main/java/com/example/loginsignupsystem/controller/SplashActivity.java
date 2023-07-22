@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
 
         // Initialize the database helper and Users DAO.
         DbHelper dbHelper = new DbHelper(this);
-        usersDao = new UsersDaoImp(dbHelper);  // Corrected this line
+        usersDao = new UsersDaoImp(dbHelper);
 
         new Handler().postDelayed(new Runnable() {
             @Override
