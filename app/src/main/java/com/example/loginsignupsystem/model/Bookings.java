@@ -9,7 +9,7 @@ public class Bookings {
     private String tour;
 
     // Constructor for creating new Booking
-    public Bookings(int userId, int reference, String tour) {
+    public Bookings(int userId, int reference, String tour, String title) {
         this.userId = userId;
         this.reference = reference;
         this.tour = tour;
