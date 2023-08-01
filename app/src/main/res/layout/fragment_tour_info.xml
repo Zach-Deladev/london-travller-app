@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tour_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            tools:text="Tour Title" />
 
         <ImageView
             android:id="@+id/tour_image"
@@ -18,23 +32,91 @@
             android:scaleType="centerCrop"
             tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/tour_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="24sp"
-            tools:text="Tour Title" />
-
-
 
         <TextView
             android:id="@+id/tour_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textColor="@color/white"
             android:textSize="16sp"
             tools:text="Here is a detailed description of the tour." />
+
+        <Button
+            android:id="@+id/read_more_button"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Read More +"
+            app:cornerRadius="4dp"
+            android:visibility="gone"/>
+        <TextView
+            android:id="@+id/datepicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="20dp"
+            android:text="Choose Date"
+            android:textAlignment="center"
+            app:cornerRadius="4dp"
+            android:textColor="@color/white"/>
+        <Spinner
+            android:id="@+id/date_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/ticketpicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_marginTop="15dp"
+            android:text="Number of Tickets"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:cornerRadius="4dp" />
+        <Spinner
+            android:id="@+id/number_of_tickets_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/date_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="dd/mm/yyyy"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/ticket_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/price_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="£0.00"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/checkout"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/price_text_view"
+            android:background="#43B613"
+            android:text="Checkout"
+            />
 
     </LinearLayout>
 

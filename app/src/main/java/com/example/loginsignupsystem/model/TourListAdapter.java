@@ -75,7 +75,6 @@ public class TourListAdapter extends ArrayAdapter<Tour> {
                 bundle.putSerializable("selectedTour", tour);
                 // Set the arguments for the fragment using the bundle.
                 tourInfoFragment.setArguments(bundle);
-
                 // Begin a FragmentTransaction to open the TourInfoFragment.
                 FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
                 // Replace the current fragment with the TourInfoFragment.

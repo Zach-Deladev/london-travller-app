@@ -32,7 +32,15 @@ public class ConfirmationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_confirmation, container, false);
-
+        // Get the arguments passed from the TourInfoFragment
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            Tour selectedTour = (Tour) bundle.getSerializable("selectedTour");
+            String chosenDate = bundle.getString("chosenDate");
+            int chosenTicketNumber = bundle.getInt("chosenTicketNumber");
+            double totalPrice = getArguments().getDouble("totalPrice");
+            // Use selectedTour, chosenDate, and chosenTicketNumber here...
+        }
         Button confirmButton = view.findViewById(R.id.btn);
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -59,8 +67,6 @@ public class ConfirmationFragment extends Fragment {
             // Generate a random booking number
             int randomNumber = generateRandomNumber();
 
-            // Get the current date in the format "yyyy-MM-dd"
-            String currentDate = getCurrentDate();
 
             // Create a new booking with the provided information
             Bookings booking = new Bookings(userId, randomNumber, currentDate, selectedTour.getTitle());
@@ -80,8 +86,8 @@ public class ConfirmationFragment extends Fragment {
                 Log.e("ConfirmationFragment", "Error inserting booking into database.");
             }
         } else {
-            // No user is currently logged in, handle this case if needed
-            // ...
+            // Error occurred while inserting the booking
+            Log.e("ConfirmationFragment", "Error inserting booking into database.");
         }
     }
 
@@ -103,11 +109,7 @@ public class ConfirmationFragment extends Fragment {
         }
     }
 
-    // Get the current date in the format "yyyy-MM-dd"
-    private String getCurrentDate() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        return sdf.format(new Date());
-    }
+
 
     private void openConfirmationPageFragment() {
         // Pass the selected tour to the ConfirmationPageFragment
