@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginSignupSystem"
         tools:targetApi="31">
-
+        <activity
+            android:name=".controller.ContactActivity"
+            android:exported="false" />
         <activity
             android:name=".controller.SignupActivity"
             android:exported="false" />
