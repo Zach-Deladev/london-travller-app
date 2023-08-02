@@ -7,35 +7,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backcc"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity2">
+        tools:context=".MainActivity2"
+
+        >
 
         <ImageView
-            android:layout_width="410dp"
+            android:layout_width="match_parent"
             android:layout_height="114dp"
             android:src="@drawable/travelers_logo"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="#454545"
+
             />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bluetop"
-            android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_width="418dp"
+            android:layout_height="617dp"
             android:layout_marginTop="112dp"
-            android:background="#00BCD4"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <EditText
@@ -45,6 +47,8 @@
                 android:layout_marginTop="8dp"
                 android:gravity="left"
                 android:hint="Message"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
@@ -72,10 +76,12 @@
                 android:id="@+id/name"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:gravity="left"
                 android:hint="Name"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:textSize="20sp"
-                android:layout_marginTop="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.491"
@@ -90,6 +96,8 @@
                 android:layout_marginTop="10dp"
                 android:gravity="left"
                 android:hint="Email"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -124,14 +132,15 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/loc" />
+            app:layout_constraintTop_toBottomOf="@+id/loc"
+            android:textColor="@color/white"/>
 
         <ImageView
             android:id="@+id/loc"
             android:layout_width="60dp"
             android:layout_height="61dp"
             android:layout_marginTop="375dp"
-            android:src="@drawable/location1"
+            android:src="@drawable/mapfig"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -144,7 +153,7 @@
             android:layout_width="60dp"
             android:layout_height="61dp"
             android:layout_marginTop="40dp"
-            android:src="@drawable/phone1"
+            android:src="@drawable/whitephone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -161,7 +170,8 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phone" />
+            app:layout_constraintTop_toBottomOf="@+id/phone"
+            android:textColor="@color/white"/>
 
 
 
@@ -191,7 +201,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="60dp"
             android:textSize="20sp"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"/>
 
 
 
