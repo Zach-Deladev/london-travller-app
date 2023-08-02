@@ -27,7 +27,7 @@ import java.util.Random;
 
 public class ConfirmationFragment extends Fragment {
     private Tour selectedTour;
-
+    private String chosenDate;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class ConfirmationFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             Tour selectedTour = (Tour) bundle.getSerializable("selectedTour");
-            String chosenDate = bundle.getString("chosenDate");
+            chosenDate = bundle.getString("chosenDate");
             int chosenTicketNumber = bundle.getInt("chosenTicketNumber");
             double totalPrice = getArguments().getDouble("totalPrice");
             // Use selectedTour, chosenDate, and chosenTicketNumber here...
@@ -67,9 +67,8 @@ public class ConfirmationFragment extends Fragment {
             // Generate a random booking number
             int randomNumber = generateRandomNumber();
 
-
             // Create a new booking with the provided information
-            Bookings booking = new Bookings(userId, randomNumber, currentDate, selectedTour.getTitle());
+            Bookings booking = new Bookings(userId, randomNumber, chosenDate, selectedTour.getTitle());
 
             // Get the instance of BookingsDao
             BookingsDao bookingsDao = BookingsDaoProvider.getInstance(requireContext());
