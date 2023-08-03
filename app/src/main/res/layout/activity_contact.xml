@@ -159,19 +159,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/loct" />
 
-
-        <TextView
+        <Button
             android:id="@+id/pht"
-            android:layout_width="155dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:text="020 8937 9111"
             android:textSize="18sp"
+            android:onClick="calltonumber"
+            android:background="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/phone"
             android:textColor="@color/white"/>
+
 
 
 

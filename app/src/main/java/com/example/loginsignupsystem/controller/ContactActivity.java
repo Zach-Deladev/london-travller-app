@@ -1,8 +1,13 @@
 package com.example.loginsignupsystem.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,10 +21,15 @@ public class ContactActivity extends AppCompatActivity {
     EditText editTextname, editTextemail, editTextmes;
     Button button;
 
+    Button pht;
+
+    private final int request_call_code=1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
+        pht=(Button) findViewById(R.id.pht);
         button= findViewById(R.id.btnsend);
         editTextname= findViewById(R.id.name);
         editTextemail=findViewById(R.id.email);
@@ -51,5 +61,17 @@ public class ContactActivity extends AppCompatActivity {
 
     }
 
+    public void calltonumber(View view) {
+
+        if(ContextCompat.checkSelfPermission(ContactActivity.this, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
+        {
+            String phone=pht.getText().toString();
+            Intent intent=new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:"+ "02089379111"));
+            startActivity(intent);
+        }
+        else
+            ActivityCompat.requestPermissions(ContactActivity.this,new String [] {Manifest.permission.CALL_PHONE} ,request_call_code);
+    }
 
 }
