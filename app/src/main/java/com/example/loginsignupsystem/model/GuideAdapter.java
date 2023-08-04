@@ -2,7 +2,6 @@ package com.example.loginsignupsystem.model;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +26,15 @@ public class GuideAdapter extends RecyclerView.Adapter<GuideAdapter.GuideViewHol
     private String chosenDate;
     private int chosenTicketNumber;
     private double totalPrice;
+    private Tour selectedTour;
 
-    public GuideAdapter(Context context, List<Guides> guides, String chosenDate, int chosenTicketNumber, double totalPrice) {
+    public GuideAdapter(Context context, List<Guides> guides, String chosenDate, int chosenTicketNumber, double totalPrice, Tour selectedTour) {
         this.context = context;
         this.guides = guides;
         this.chosenDate = chosenDate;
         this.chosenTicketNumber = chosenTicketNumber;
         this.totalPrice = totalPrice;
+        this.selectedTour = selectedTour;
     }
 
     @NonNull
@@ -47,39 +48,26 @@ public class GuideAdapter extends RecyclerView.Adapter<GuideAdapter.GuideViewHol
     public void onBindViewHolder(@NonNull GuideViewHolder holder, int position) {
         Guides guide = guides.get(position);
 
-        // Set the image resource ID to the ImageView
         holder.image.setImageResource(guide.getImage());
-
-        // Set the guide's name and language
         holder.name.setText(guide.getGuidName());
         holder.language.setText(guide.getLanguage());
 
-        // Add an onClickListener to the select button
-        holder.selectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("GuideAdapter", "Button clicked for guide: " + guide.getGuidName());
-                ConfirmationFragment confirmationFragment = new ConfirmationFragment();
-                Bundle args = new Bundle();
+        holder.selectButton.setOnClickListener(v -> {
+            ConfirmationFragment confirmationFragment = new ConfirmationFragment();
+            Bundle args = new Bundle();
 
-                args.putString("chosenDate", chosenDate);
-                args.putInt("chosenTicketNumber", chosenTicketNumber);
-                args.putDouble("totalPrice", totalPrice);
-                args.putSerializable("selectedGuide", guide);
+            args.putString("chosenDate", chosenDate);
+            args.putInt("chosenTicketNumber", chosenTicketNumber);
+            args.putDouble("totalPrice", totalPrice);
+            args.putSerializable("selectedGuide", guide);
+            args.putSerializable("selectedTour", selectedTour);
 
-                confirmationFragment.setArguments(args);
+            confirmationFragment.setArguments(args);
 
-                FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
-
-                // Replace the current fragment with the confirmationFragment
-                transaction.replace(R.id.fragment_container, confirmationFragment);
-
-                // Add the transaction to the back stack, so the user can navigate back
-                transaction.addToBackStack(null);
-
-                // Commit the transaction
-                transaction.commit();
-            }
+            FragmentTransaction transaction = ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, confirmationFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         });
     }
 

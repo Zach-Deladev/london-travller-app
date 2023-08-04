@@ -16,12 +16,16 @@ import com.example.loginsignupsystem.model.GuidesDao;
 import com.example.loginsignupsystem.model.GuidesDaoProvider;
 import com.example.loginsignupsystem.model.Tour;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SelectGuideFragment extends Fragment {
 
     private List<Guides> guides;
+    private RecyclerView recyclerView;
+    private String chosenDate;
+    private int chosenTicketNumber;
+    private double totalPrice;
+    private Tour selectedTour;
 
     public SelectGuideFragment() {
         // Required empty public constructor
@@ -32,40 +36,20 @@ public class SelectGuideFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment and get the RecyclerView
         View view = inflater.inflate(R.layout.fragment_select_guide2, container, false);
-        RecyclerView recyclerView = view.findViewById(R.id.guide_list);
+        recyclerView = view.findViewById(R.id.guide_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         // Get the arguments before returning the view
         Bundle args = getArguments();
         if (args != null) {
-            Tour selectedTour = (Tour) args.getSerializable("selectedTour");
-            String chosenDate = args.getString("chosenDate");
-            int chosenTicketNumber = args.getInt("chosenTicketNumber");
-            double totalPrice = args.getDouble("totalPrice");
-
-            fetchGuidesAndUpdateUI(recyclerView, chosenDate, chosenTicketNumber, totalPrice);
+            selectedTour = (Tour) args.getSerializable("selectedTour");
+            chosenDate = args.getString("chosenDate");
+            chosenTicketNumber = args.getInt("chosenTicketNumber");
+            totalPrice = args.getDouble("totalPrice");
         }
 
         return view;
     }
-
-    private void fetchGuidesAndUpdateUI(RecyclerView recyclerView, String chosenDate, int chosenTicketNumber, double totalPrice) {
-        // TODO: Fetch the guides from the database
-        GuidesDao guidesDao = GuidesDaoProvider.getInstance(getContext());
-        guides = guidesDao.getAllGuides();
-
-        // Then create an instance of GuideAdapter
-        // Initialize your GuideAdapter
-        GuideAdapter adapter = new GuideAdapter(getContext(), guides, chosenDate, chosenTicketNumber, totalPrice);
-
-
-        recyclerView.setAdapter(adapter);
-    }
-
-
-
-
-
 
     @Override
     public void onStart() {
@@ -74,6 +58,13 @@ public class SelectGuideFragment extends Fragment {
     }
 
     private void fetchGuidesAndUpdateUI() {
-        // TODO: Fetch the guides from the database and update the RecyclerView
+        // Fetch the guides from the database
+        GuidesDao guidesDao = GuidesDaoProvider.getInstance(getContext());
+        guides = guidesDao.getAllGuides();
+
+        // Initialize your GuideAdapter
+        GuideAdapter adapter = new GuideAdapter(getContext(), guides, chosenDate, chosenTicketNumber, totalPrice, selectedTour);
+
+        recyclerView.setAdapter(adapter);
     }
 }

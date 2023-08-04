@@ -26,7 +26,8 @@ import java.util.Random;
 public class ConfirmationFragment extends Fragment {
     private Tour selectedTour;
     private Guides selectedGuide;
-    private String chosenDate;  // Make chosenDate an instance variable
+    private String chosenDate;
+    private double totalPrice; // Make totalPrice an instance variable
 
     private TextView date;
     private TextView ticketnum;
@@ -48,7 +49,7 @@ public class ConfirmationFragment extends Fragment {
             selectedTour = (Tour) bundle.getSerializable("selectedTour");
             chosenDate = bundle.getString("chosenDate");
             int chosenTicketNumber = bundle.getInt("chosenTicketNumber");
-            double totalPrice = bundle.getDouble("totalPrice");
+            totalPrice = bundle.getDouble("totalPrice"); // Set the totalPrice variable
             selectedGuide = (Guides) bundle.getSerializable("selectedGuide");
 
             if (selectedGuide != null) {
@@ -59,8 +60,6 @@ public class ConfirmationFragment extends Fragment {
             date.setText("Date Chosen: " + chosenDate);
             ticketnum.setText("Ticket Number: " + chosenTicketNumber);
             price.setText("Total Price: " + String.format("£%.2f", totalPrice));
-
-
         }
 
         Button confirmButton = view.findViewById(R.id.btn);
@@ -82,7 +81,7 @@ public class ConfirmationFragment extends Fragment {
         int userId = getLoggedInUserId();
         if (userId != -1) {
             int randomNumber = generateRandomNumber();
-            Bookings booking = new Bookings(userId, randomNumber, chosenDate, selectedTour.getTitle());
+            Bookings booking = new Bookings(userId, randomNumber, chosenDate, selectedTour.getTitle(), totalPrice); // Add totalPrice as argument
             BookingsDao bookingsDao = BookingsDaoProvider.getInstance(requireContext());
             long result = bookingsDao.addBooking(booking);
 
@@ -117,7 +116,6 @@ public class ConfirmationFragment extends Fragment {
         args.putSerializable("selectedTour", selectedTour);
         ConfirmationPageFragment confirmationPageFragment = new ConfirmationPageFragment();
         confirmationPageFragment.setArguments(args);
-
         FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment_container, confirmationPageFragment);
         transaction.addToBackStack(null);
