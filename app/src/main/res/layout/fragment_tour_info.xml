@@ -4,66 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@drawable/background"
     android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
         >
+
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/travelers_logo" />
 
         <TextView
             android:id="@+id/tour_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="28dp"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4"
+            tools:layout_editor_absoluteX="0dp"
             tools:text="Tour Title" />
 
         <ImageView
             android:id="@+id/tour_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_marginTop="40dp"
             android:contentDescription="@string/tour_image"
             android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tour_title"
             tools:src="@tools:sample/avatars" />
-
 
         <TextView
             android:id="@+id/tour_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:textColor="@color/white"
             android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tour_image"
             tools:text="Here is a detailed description of the tour." />
 
         <Button
             android:id="@+id/read_more_button"
-
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Read More +"
             app:cornerRadius="4dp"
-            android:visibility="gone"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tour_description" />
+
         <TextView
             android:id="@+id/datepicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="20dp"
             android:text="Choose Date"
             android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20dp"
             app:cornerRadius="4dp"
-            android:textColor="@color/white"/>
+            app:layout_constraintTop_toBottomOf="@+id/read_more_button" />
+
         <Spinner
             android:id="@+id/date_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/datepicker"
+            tools:layout_editor_absoluteX="0dp" />
+
         <TextView
             android:id="@+id/ticketpicker"
             android:layout_width="match_parent"
@@ -73,11 +98,13 @@
             android:text="Number of Tickets"
             android:textAlignment="center"
             android:textColor="@color/white"
-            app:cornerRadius="4dp" />
+            app:cornerRadius="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/date_spinner"/>
         <Spinner
             android:id="@+id/number_of_tickets_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/ticketpicker"/>
 
         <TextView
             android:id="@+id/date_text_view"
@@ -86,7 +113,8 @@
             android:text="dd/mm/yyyy"
             android:textAlignment="textEnd"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/number_of_tickets_spinner"/>
 
         <TextView
             android:id="@+id/ticket_text_view"
@@ -95,7 +123,8 @@
             android:text="0"
             android:textAlignment="textEnd"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/date_text_view"/>
 
 
         <TextView
@@ -106,7 +135,8 @@
             android:text="£0.00"
             android:textAlignment="textEnd"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/ticket_text_view"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/checkout"
@@ -115,9 +145,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/price_text_view"
             android:background="#43B613"
-            android:text="Checkout"
+            android:text="Choose Tour Guide"
+            app:layout_constraintTop_toBottomOf="@+id/price_text_view"
             />
 
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

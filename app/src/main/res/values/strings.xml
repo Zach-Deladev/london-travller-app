@@ -33,4 +33,6 @@
     <string name="settingss">Settings</string>
     <string name="bookings">Bookings</string>
     <string name="tour_image">tour image</string>
+    <string name="read_less">Read Less</string>
+    <string name="read_more">Read more +</string>
 </resources>
