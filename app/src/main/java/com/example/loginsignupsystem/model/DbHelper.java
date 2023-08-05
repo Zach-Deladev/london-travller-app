@@ -13,7 +13,7 @@ import com.example.loginsignupsystem.R;
 public class DbHelper extends SQLiteOpenHelper {
 
     // Database Version
-    public static final int dbVersion = 23; // Increment database version due to schema changes
+    public static final int dbVersion = 24; // Increment database version due to schema changes
 
     // Database Name
     public static final String dbName = "LoginSignupSystem";
