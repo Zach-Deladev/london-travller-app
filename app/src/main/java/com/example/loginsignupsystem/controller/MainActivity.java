@@ -1,36 +1,83 @@
 package com.example.loginsignupsystem.controller;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentTransaction;
 import com.example.loginsignupsystem.R;
-import com.example.loginsignupsystem.model.Tour;
+import com.example.loginsignupsystem.model.Users;
+import com.example.loginsignupsystem.model.UsersDao;
+import com.example.loginsignupsystem.model.UsersDaoProvider;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    // Define a BroadcastReceiver to handle tour selection broadcasts
-    private BroadcastReceiver receiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // Check if the broadcast's action is "tourSelected"
-            if (intent.getAction().equals("tourSelected")) {
-                // If so, get the selected Tour from the intent's extras and open the TourInfoFragment
-                Tour selectedTour = (Tour) intent.getSerializableExtra("selectedTour");
-                openTourInfoFragment(selectedTour);
-            }
-        }
-    };
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle; // Define ActionBarDrawerToggle for burger menu
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize DrawerLayout
+        drawerLayout = findViewById(R.id.drawer_layout);
+
+        // Set up the toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Disable the default title
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        // Inflate the custom view
+        View customView = LayoutInflater.from(this).inflate(R.layout.toolbar_custom_logo, null);
+
+        // Set the custom view
+        toolbar.addView(customView);
+
+
+
+
+        // Create the ActionBarDrawerToggle for the burger menu
+        toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        // Set the color of the burger menu icon
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        // Set up NavigationView
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.nav_home) {
+                    // Handle home navigation here
+                } else if (itemId == R.id.nav_bookins) {
+                    // Handle bookings navigation here
+                } else if (itemId == R.id.nav_logout) {
+                    // Handle logout navigation here
+                    UsersDao usersDao = UsersDaoProvider.getInstance(MainActivity.this);
+                    Users loggedInUser = usersDao.getLoggedInUser();
+                    usersDao.logOutUser(loggedInUser.getId());
+                    Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                    i.putExtra("registrationSuccessMessage", "Logged out Successfully!");
+                    startActivity(i);
+                }
+
+                drawerLayout.closeDrawers(); // Close the drawer after selecting an item
+                return true;
+            }
+        });
 
         // If this is the first creation of MainActivity, open HomeFragment
         if (savedInstanceState == null) {
@@ -39,40 +86,5 @@ public class MainActivity extends AppCompatActivity {
             transaction.replace(R.id.fragment_container, homeFragment);
             transaction.commit();
         }
-
-        // Register the BroadcastReceiver to listen for "tourSelected" broadcasts
-        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("tourSelected"));
-    }
-
-    @Override
-    protected void onDestroy() {
-        // Unregister the BroadcastReceiver when the activity is destroyed to prevent memory leaks
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
-        super.onDestroy();
-    }
-
-    // Method to open the TourInfoFragment with the selected Tour
-    private void openTourInfoFragment(Tour selectedTour) {
-        // Create a new TourInfoFragment
-        TourInfoFragment tourInfoFragment = new TourInfoFragment();
-
-        // Create a new Bundle to hold the arguments
-        Bundle args = new Bundle();
-        args.putSerializable("selectedTour", selectedTour);
-
-        // Set the arguments for the fragment
-        tourInfoFragment.setArguments(args);
-
-        // Start a FragmentTransaction to replace the current fragment
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        // Replace the current fragment with the new TourInfoFragment
-        transaction.replace(R.id.fragment_container, tourInfoFragment);
-
-        // Add the transaction to the back stack, allowing the user to navigate back to the previous fragment
-        transaction.addToBackStack(null);
-
-        // Commit the transaction, applying the changes
-        transaction.commit();
     }
 }

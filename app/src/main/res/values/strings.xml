@@ -21,6 +21,9 @@
     <string name="tour_list">Tour List</string>
     <string name="log_oout">Log Out</string>
     <string name="shopping">Shopping</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <string name="art">Art</string>
     <string name="landmarks">landmarks</string>
     <string name="museums">museums</string>
