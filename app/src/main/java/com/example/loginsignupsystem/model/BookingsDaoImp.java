@@ -1,5 +1,3 @@
-
-
 package com.example.loginsignupsystem.model;
 
 import android.content.ContentValues;
@@ -16,6 +14,7 @@ public class BookingsDaoImp implements BookingsDao{
     private static final String REFERENCE = "reference";
     private static final String DATE = "date";
     private static final String TOUR = "tour";
+    private static final String PRICE = "price"; // added PRICE field
 
     private final DbHelper dbHelper;
 
@@ -28,12 +27,15 @@ public class BookingsDaoImp implements BookingsDao{
         ContentValues cv = new ContentValues();
         cv.put(USERID, booking.getUserId());
         cv.put(REFERENCE, booking.getReference());
+        cv.put(DATE, booking.getDate());
         cv.put(TOUR, booking.getTour());
+        cv.put(PRICE, booking.getPrice());
 
         long result = db.insert(dbTable, null, cv);
         db.close();
         return result;
     }
+
 
     public List<Bookings> getAllBookings() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -47,7 +49,8 @@ public class BookingsDaoImp implements BookingsDao{
                         cursor.getInt(cursor.getColumnIndex(USERID)),
                         cursor.getInt(cursor.getColumnIndex(REFERENCE)),
                         cursor.getString(cursor.getColumnIndex(DATE)),
-                        cursor.getString(cursor.getColumnIndex(TOUR))
+                        cursor.getString(cursor.getColumnIndex(TOUR)),
+                        cursor.getDouble(cursor.getColumnIndex(PRICE)) // added PRICE field
                 );
                 bookings.add(booking);
             } while (cursor.moveToNext());
@@ -68,7 +71,8 @@ public class BookingsDaoImp implements BookingsDao{
                     cursor.getInt(cursor.getColumnIndex(USERID)),
                     cursor.getInt(cursor.getColumnIndex(REFERENCE)),
                     cursor.getString(cursor.getColumnIndex(DATE)),
-                    cursor.getString(cursor.getColumnIndex(TOUR))
+                    cursor.getString(cursor.getColumnIndex(TOUR)),
+                    cursor.getDouble(cursor.getColumnIndex(PRICE)) // added PRICE field
             );
         }
         cursor.close();
@@ -88,7 +92,8 @@ public class BookingsDaoImp implements BookingsDao{
                         cursor.getInt(cursor.getColumnIndex(USERID)),
                         cursor.getInt(cursor.getColumnIndex(REFERENCE)),
                         cursor.getString(cursor.getColumnIndex(DATE)),
-                        cursor.getString(cursor.getColumnIndex(TOUR))
+                        cursor.getString(cursor.getColumnIndex(TOUR)),
+                        cursor.getDouble(cursor.getColumnIndex(PRICE)) // added PRICE field
                 );
                 bookings.add(booking);
             } while (cursor.moveToNext());
