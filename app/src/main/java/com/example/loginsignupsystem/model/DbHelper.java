@@ -84,7 +84,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "\n" +
                 "The present building, the third site to house the National Gallery, was designed by William Wilkins. Building took from 1832 to 1838, when it opened. Only the facade onto Trafalgar Square remains essentially unchanged from this time, as the building has been expanded piecemeal throughout its history. Wilkins's building was often criticised for the perceived weaknesses of its design and for its lack of space; the latter problem led to the establishment of the Tate Gallery for British art in 1897. The Sainsbury Wing, a 1991 extension to the west by Robert Venturi and Denise Scott Brown, is a significant example of Postmodernist architecture in Britain.");
         cv.put("category", "museums");
-        cv.put("imageResource", R.drawable.nationalgallery);
+        cv.put("imageResource", R.drawable.nationalgallery );
         db.insert(dbTourTable, null, cv);
 
         // Tour 2
