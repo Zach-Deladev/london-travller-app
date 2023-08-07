@@ -23,7 +23,7 @@ import com.example.loginsignupsystem.model.UsersDaoProvider;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
-    private Button button;
+
     private TextView textView;
     private ImageView museums, landmarks, art, shopping;
 
@@ -35,13 +35,12 @@ public class HomeFragment extends Fragment {
         // Initialize image slider
         ImageSlider imageSlider = view.findViewById(R.id.imageSlider);
         ArrayList<SlideModel> slideModels = new ArrayList<>();
-        slideModels.add(new SlideModel(R.drawable.landscapeone, ScaleTypes.FIT));
-        slideModels.add(new SlideModel(R.drawable.landscapetwo, ScaleTypes.FIT));
-        slideModels.add(new SlideModel(R.drawable.landscape3, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.nationalgallery, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.bondstreet, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.tategallery, ScaleTypes.FIT));
         imageSlider.setImageList(slideModels, ScaleTypes.FIT);
 
-        // Initialize logout button
-        button = view.findViewById(R.id.button);
+
 
         // Initialize usersDao
         UsersDao usersDao = UsersDaoProvider.getInstance(getActivity());
@@ -73,14 +72,7 @@ public class HomeFragment extends Fragment {
             textView.setText(String.format("Hello, %s!", username));
         }
 
-        // Log out user when logout button clicked
-        Users loggedInUser = usersDao.getLoggedInUser();
-        button.setOnClickListener(v -> {
-            usersDao.logOutUser(loggedInUser.getId());
-            Intent i = new Intent(getActivity(), LoginActivity.class);
-            i.putExtra("registrationSuccessMessage", "Logged out Successfully!");
-            startActivity(i);
-        });
+
 
         return view;
     }

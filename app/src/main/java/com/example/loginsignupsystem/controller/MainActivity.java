@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize DrawerLayout
         drawerLayout = findViewById(R.id.drawer_layout);
-
         // Set up the toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -38,13 +37,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         // Inflate the custom view
         View customView = LayoutInflater.from(this).inflate(R.layout.toolbar_custom_logo, null);
-
         // Set the custom view
         toolbar.addView(customView);
-
-
-
-
         // Create the ActionBarDrawerToggle for the burger menu
         toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
