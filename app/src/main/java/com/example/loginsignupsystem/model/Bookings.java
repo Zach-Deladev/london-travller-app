@@ -7,25 +7,28 @@ public class Bookings {
     private int reference;
     private String date;
     private String tour;
-    private double price; // added price field
+    private double price;
+    private int tickets; // Number of tickets field
 
     // Constructor for creating new Booking
-    public Bookings(int userId, int reference, String date, String tour, double price) { // added price parameter
+    public Bookings(int userId, int reference, String date, String tour, double price, int tickets) {
         this.userId = userId;
         this.reference = reference;
         this.date = date;
         this.tour = tour;
-        this.price = price; // set price
+        this.price = price;
+        this.tickets = tickets; // set tickets
     }
 
     // Constructor for creating Booking from database values
-    public Bookings(int id, int userId, int reference, String date, String tour, double price) { // added price parameter
+    public Bookings(int id, int userId, int reference, String date, String tour, double price, int tickets) {
         this.id = id;
         this.userId = userId;
         this.reference = reference;
         this.date = date;
         this.tour = tour;
-        this.price = price; // set price
+        this.price = price;
+        this.tickets = tickets; // set tickets
     }
 
     public int getId() {
@@ -68,12 +71,19 @@ public class Bookings {
         this.tour = tour;
     }
 
-    // getter and setter for price
     public double getPrice() {
         return price;
     }
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(int tickets) {
+        this.tickets = tickets;
     }
 }

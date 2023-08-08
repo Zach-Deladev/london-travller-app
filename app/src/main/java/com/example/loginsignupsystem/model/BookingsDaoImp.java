@@ -14,7 +14,8 @@ public class BookingsDaoImp implements BookingsDao{
     private static final String REFERENCE = "reference";
     private static final String DATE = "date";
     private static final String TOUR = "tour";
-    private static final String PRICE = "price"; // added PRICE field
+    private static final String PRICE = "price";
+    private static final String TICKETS = "tickets"; // new TICKETS field
 
     private final DbHelper dbHelper;
 
@@ -30,12 +31,12 @@ public class BookingsDaoImp implements BookingsDao{
         cv.put(DATE, booking.getDate());
         cv.put(TOUR, booking.getTour());
         cv.put(PRICE, booking.getPrice());
+        cv.put(TICKETS, booking.getTickets()); // added TICKETS field
 
         long result = db.insert(dbTable, null, cv);
         db.close();
         return result;
     }
-
 
     public List<Bookings> getAllBookings() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -44,15 +45,7 @@ public class BookingsDaoImp implements BookingsDao{
 
         if (cursor.moveToFirst()) {
             do {
-                Bookings booking = new Bookings(
-                        cursor.getInt(cursor.getColumnIndex(ID)),
-                        cursor.getInt(cursor.getColumnIndex(USERID)),
-                        cursor.getInt(cursor.getColumnIndex(REFERENCE)),
-                        cursor.getString(cursor.getColumnIndex(DATE)),
-                        cursor.getString(cursor.getColumnIndex(TOUR)),
-                        cursor.getDouble(cursor.getColumnIndex(PRICE)) // added PRICE field
-                );
-                bookings.add(booking);
+                bookings.add(createBookingFromCursor(cursor));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -66,14 +59,7 @@ public class BookingsDaoImp implements BookingsDao{
         Cursor cursor = db.query(dbTable, null, ID + "=?", new String[]{String.valueOf(id)}, null, null, null);
 
         if (cursor.moveToFirst()) {
-            booking = new Bookings(
-                    cursor.getInt(cursor.getColumnIndex(ID)),
-                    cursor.getInt(cursor.getColumnIndex(USERID)),
-                    cursor.getInt(cursor.getColumnIndex(REFERENCE)),
-                    cursor.getString(cursor.getColumnIndex(DATE)),
-                    cursor.getString(cursor.getColumnIndex(TOUR)),
-                    cursor.getDouble(cursor.getColumnIndex(PRICE)) // added PRICE field
-            );
+            booking = createBookingFromCursor(cursor);
         }
         cursor.close();
         db.close();
@@ -87,15 +73,7 @@ public class BookingsDaoImp implements BookingsDao{
 
         if (cursor.moveToFirst()) {
             do {
-                Bookings booking = new Bookings(
-                        cursor.getInt(cursor.getColumnIndex(ID)),
-                        cursor.getInt(cursor.getColumnIndex(USERID)),
-                        cursor.getInt(cursor.getColumnIndex(REFERENCE)),
-                        cursor.getString(cursor.getColumnIndex(DATE)),
-                        cursor.getString(cursor.getColumnIndex(TOUR)),
-                        cursor.getDouble(cursor.getColumnIndex(PRICE)) // added PRICE field
-                );
-                bookings.add(booking);
+                bookings.add(createBookingFromCursor(cursor));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -103,4 +81,15 @@ public class BookingsDaoImp implements BookingsDao{
         return bookings;
     }
 
+    private Bookings createBookingFromCursor(Cursor cursor) {
+        return new Bookings(
+                cursor.getInt(cursor.getColumnIndex(ID)),
+                cursor.getInt(cursor.getColumnIndex(USERID)),
+                cursor.getInt(cursor.getColumnIndex(REFERENCE)),
+                cursor.getString(cursor.getColumnIndex(DATE)),
+                cursor.getString(cursor.getColumnIndex(TOUR)),
+                cursor.getDouble(cursor.getColumnIndex(PRICE)),
+                cursor.getInt(cursor.getColumnIndex(TICKETS)) // added TICKETS field
+        );
+    }
 }

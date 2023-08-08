@@ -13,7 +13,7 @@ import com.example.loginsignupsystem.R;
 public class DbHelper extends SQLiteOpenHelper {
 
     // Database Version
-    public static final int dbVersion = 24; // Increment database version due to schema changes
+    public static final int dbVersion = 25; // Increment database version due to schema changes
 
     // Database Name
     public static final String dbName = "LoginSignupSystem";
@@ -57,7 +57,8 @@ public class DbHelper extends SQLiteOpenHelper {
             + "reference INTEGER, "
             + "date TEXT , "
             + "tour TEXT , "
-            + "price REAL); ";
+            + "price REAL, "
+            + "tickets INTEGER); ";
 
     // SQL statement to create guide table
     public static final String CREATE_GUIDE_TABLE = "CREATE TABLE " + dbGuideTable + " ("

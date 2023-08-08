@@ -81,7 +81,8 @@ public class ConfirmationFragment extends Fragment {
         int userId = getLoggedInUserId();
         if (userId != -1) {
             int randomNumber = generateRandomNumber();
-            Bookings booking = new Bookings(userId, randomNumber, chosenDate, selectedTour.getTitle(), totalPrice); // Add totalPrice as argument
+            int chosenTicketNumber = getArguments().getInt("chosenTicketNumber"); // Retrieve the number of tickets
+            Bookings booking = new Bookings(userId, randomNumber, chosenDate, selectedTour.getTitle(), totalPrice, chosenTicketNumber); // Add chosenTicketNumber as argument
             BookingsDao bookingsDao = BookingsDaoProvider.getInstance(requireContext());
             long result = bookingsDao.addBooking(booking);
 

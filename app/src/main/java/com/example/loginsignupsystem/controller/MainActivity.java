@@ -54,10 +54,17 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
 
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
                 if (itemId == R.id.nav_home) {
-                    // Handle home navigation here
-                } else if (itemId == R.id.nav_bookins) {
-                    // Handle bookings navigation here
+                    HomeFragment homeFragment = new HomeFragment();
+                    transaction.replace(R.id.fragment_container, homeFragment);
+                } else if (itemId == R.id.nav_bookings) {
+                    BookingsListFragment bookingsListFragment = new BookingsListFragment();
+                    transaction.replace(R.id.fragment_container, bookingsListFragment);
+                } else if (itemId == R.id.nav_contact) {
+                    ContactFragment contactFragment = new ContactFragment();
+                    transaction.replace(R.id.fragment_container, contactFragment);
                 } else if (itemId == R.id.nav_logout) {
                     // Handle logout navigation here
                     UsersDao usersDao = UsersDaoProvider.getInstance(MainActivity.this);
@@ -66,12 +73,16 @@ public class MainActivity extends AppCompatActivity {
                     Intent i = new Intent(MainActivity.this, LoginActivity.class);
                     i.putExtra("registrationSuccessMessage", "Logged out Successfully!");
                     startActivity(i);
+                    return true; // Return here to prevent the transaction from being committed
                 }
 
+                transaction.addToBackStack(null); // Optional, if you want to add the transaction to the back stack
+                transaction.commit();
                 drawerLayout.closeDrawers(); // Close the drawer after selecting an item
                 return true;
             }
         });
+
 
         // If this is the first creation of MainActivity, open HomeFragment
         if (savedInstanceState == null) {
