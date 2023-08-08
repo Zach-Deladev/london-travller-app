@@ -19,76 +19,71 @@ import com.example.loginsignupsystem.model.UsersDaoProvider;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle toggle; // Define ActionBarDrawerToggle for burger menu
+    private DrawerLayout drawerLayout; // Main layout containing the navigation drawer
+    private ActionBarDrawerToggle toggle; // Toggle button for opening/closing the navigation drawer
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize DrawerLayout
+        // Initialize DrawerLayout (container for navigation drawer)
         drawerLayout = findViewById(R.id.drawer_layout);
-        // Set up the toolbar
+
+        // Initialize and set up the toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false); // Hide the default title
 
-        // Disable the default title
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        // Inflate the custom view
+        // Inflate custom view (e.g., app logo) and add it to the toolbar
         View customView = LayoutInflater.from(this).inflate(R.layout.toolbar_custom_logo, null);
-        // Set the custom view
         toolbar.addView(customView);
-        // Create the ActionBarDrawerToggle for the burger menu
-        toggle = new ActionBarDrawerToggle(
-                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        // Set the color of the burger menu icon
+
+        // Configure the ActionBarDrawerToggle for burger menu and its icon color
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.white));
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        // Set up NavigationView
+        // Initialize NavigationView and its item click listener
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                // Handle click event on navigation items
                 int itemId = item.getItemId();
-
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
+                // Determine the clicked item and replace the fragment accordingly
                 if (itemId == R.id.nav_home) {
-                    HomeFragment homeFragment = new HomeFragment();
-                    transaction.replace(R.id.fragment_container, homeFragment);
+                    // Navigate to home
+                    transaction.replace(R.id.fragment_container, new HomeFragment());
                 } else if (itemId == R.id.nav_bookings) {
-                    BookingsListFragment bookingsListFragment = new BookingsListFragment();
-                    transaction.replace(R.id.fragment_container, bookingsListFragment);
+                    // Navigate to bookings list
+                    transaction.replace(R.id.fragment_container, new BookingsListFragment());
                 } else if (itemId == R.id.nav_contact) {
-                    ContactFragment contactFragment = new ContactFragment();
-                    transaction.replace(R.id.fragment_container, contactFragment);
+                    // Navigate to contact page
+                    transaction.replace(R.id.fragment_container, new ContactFragment());
                 } else if (itemId == R.id.nav_logout) {
-                    // Handle logout navigation here
+                    // Handle logout: clear the logged-in user and navigate to login page
                     UsersDao usersDao = UsersDaoProvider.getInstance(MainActivity.this);
                     Users loggedInUser = usersDao.getLoggedInUser();
                     usersDao.logOutUser(loggedInUser.getId());
-                    Intent i = new Intent(MainActivity.this, LoginActivity.class);
-                    i.putExtra("registrationSuccessMessage", "Logged out Successfully!");
-                    startActivity(i);
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class).putExtra("registrationSuccessMessage", "Logged out Successfully!"));
                     return true; // Return here to prevent the transaction from being committed
                 }
 
-                transaction.addToBackStack(null); // Optional, if you want to add the transaction to the back stack
+                transaction.addToBackStack(null); // Add transaction to back stack (optional)
                 transaction.commit();
-                drawerLayout.closeDrawers(); // Close the drawer after selecting an item
+                drawerLayout.closeDrawers(); // Close the navigation drawer
                 return true;
             }
         });
 
-
-        // If this is the first creation of MainActivity, open HomeFragment
+        // If this is the first creation of MainActivity, set the HomeFragment as the default
         if (savedInstanceState == null) {
-            HomeFragment homeFragment = new HomeFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, homeFragment);
+            transaction.replace(R.id.fragment_container, new HomeFragment());
             transaction.commit();
         }
     }

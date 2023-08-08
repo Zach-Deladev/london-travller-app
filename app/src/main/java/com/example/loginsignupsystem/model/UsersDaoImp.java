@@ -4,12 +4,11 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
 import org.mindrot.jbcrypt.BCrypt;
 
 public class UsersDaoImp implements UsersDao {
 
-    // Declare table name and column names
+    // Constants for table and column names
     private static final String dbTable = "users";
     private static final String ID = "id";
     private static final String FULLNAME = "fullname";
@@ -18,45 +17,41 @@ public class UsersDaoImp implements UsersDao {
     private static final String PASSWORD = "password";
     private static final String ISLOGGEDIN = "isLoggedIn";
 
-    // Instance of database helper
+    // Database helper object for managing SQLite operations
     private final DbHelper dbHelper;
 
-    // Constructor
+    // Constructor to initialize dbHelper
     public UsersDaoImp(DbHelper dbHelper) {
         this.dbHelper = dbHelper;
     }
 
+    // Method to hash password using BCrypt
     @Override
     public String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
+    // Method to check if an email exists in the database
     @Override
     public boolean emailExists(String email) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(dbTable,
-                new String[]{EMAILADDRESS},
-                EMAILADDRESS + "=?",
-                new String[]{email},
-                null, null, null);
+        Cursor cursor = db.query(dbTable, new String[]{EMAILADDRESS}, EMAILADDRESS + "=?", new String[]{email}, null, null, null);
         boolean exists = (cursor.getCount() > 0);
         cursor.close();
         return exists;
     }
 
+    // Method to check if a phone number exists in the database
     @Override
     public boolean phoneExists(String phone) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(dbTable,
-                new String[]{PHONENUMBER},
-                PHONENUMBER + "=?",
-                new String[]{phone},
-                null, null, null);
+        Cursor cursor = db.query(dbTable, new String[]{PHONENUMBER}, PHONENUMBER + "=?", new String[]{phone}, null, null, null);
         boolean exists = (cursor.getCount() > 0);
         cursor.close();
         return exists;
     }
 
+    // Method to register a new user in the database
     @Override
     public long register(Users user) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -75,7 +70,7 @@ public class UsersDaoImp implements UsersDao {
         return result;
     }
 
-
+    // Method to log in a user by updating the isLoggedIn column
     @Override
     public void logInUser(int userId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -84,6 +79,7 @@ public class UsersDaoImp implements UsersDao {
         db.update(dbTable, values, ID + "=?", new String[]{String.valueOf(userId)});
     }
 
+    // Method to log out a user by updating the isLoggedIn column
     @Override
     public void logOutUser(int userId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -92,14 +88,11 @@ public class UsersDaoImp implements UsersDao {
         db.update(dbTable, values, ID + "=?", new String[]{String.valueOf(userId)});
     }
 
+    // Method to retrieve the logged-in user's information
     @Override
     public Users getLoggedInUser() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(dbTable,
-                null,
-                ISLOGGEDIN + "=?",
-                new String[]{"1"},
-                null, null, null);
+        Cursor cursor = db.query(dbTable, null, ISLOGGEDIN + "=?", new String[]{"1"}, null, null, null);
 
         if (cursor.moveToFirst()) {
             Users user = new Users(
@@ -116,30 +109,22 @@ public class UsersDaoImp implements UsersDao {
         }
     }
 
+    // Method to check if a user is logged in
     @Override
     public boolean isLoggedIn() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(dbTable,
-                new String[]{ISLOGGEDIN},
-                ISLOGGEDIN + "=?",
-                new String[]{"1"},
-                null, null, null);
+        Cursor cursor = db.query(dbTable, new String[]{ISLOGGEDIN}, ISLOGGEDIN + "=?", new String[]{"1"}, null, null, null);
 
         boolean isLoggedIn = cursor.moveToFirst();
         cursor.close();
         return isLoggedIn;
     }
 
+    // Method to retrieve a user's information by user ID
     @Override
     public Users getUserById(int userId) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(
-                dbTable,
-                new String[]{ID, FULLNAME, EMAILADDRESS, PHONENUMBER, PASSWORD},
-                ID + "=?",
-                new String[]{String.valueOf(userId)},
-                null, null, null
-        );
+        Cursor cursor = db.query(dbTable, new String[]{ID, FULLNAME, EMAILADDRESS, PHONENUMBER, PASSWORD}, ID + "=?", new String[]{String.valueOf(userId)}, null, null, null);
 
         if (cursor != null && cursor.moveToFirst()) {
             Users user = new Users(
@@ -159,17 +144,11 @@ public class UsersDaoImp implements UsersDao {
         }
     }
 
-
-
-
+    // Method to check user credentials during login and return user ID if successful
     @Override
     public int checkUserCredentials(String email, String password) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(dbTable,
-                new String[]{ID, PASSWORD},
-                EMAILADDRESS + "=?",
-                new String[]{email},
-                null, null, null);
+        Cursor cursor = db.query(dbTable, new String[]{ID, PASSWORD}, EMAILADDRESS + "=?", new String[]{email}, null, null, null);
 
         if (cursor != null && cursor.moveToFirst()) {
             String hashedPassword = cursor.getString(cursor.getColumnIndex(PASSWORD));

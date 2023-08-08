@@ -12,31 +12,32 @@ import com.example.loginsignupsystem.model.UsersDaoImp;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private UsersDao usersDao;
+    private UsersDao usersDao; // Data Access Object for Users
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        // Initialize the database helper and Users DAO.
+        // Creating an instance of DbHelper and UsersDao for database operations
         DbHelper dbHelper = new DbHelper(this);
         usersDao = new UsersDaoImp(dbHelper);
 
+        // Creating a handler to execute code after a delay of 2000ms (2 seconds)
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // This is where we will check if the user is already logged in or not
+                // Check if a user is already logged in
                 if (usersDao.isLoggedIn()) {
-                    // If the user is already logged in, redirect to the main activity
+                    // Redirect to the main activity if the user is logged in
                     startActivity(new Intent(SplashActivity.this, MainActivity.class));
                 } else {
-                    // If the user is not logged in, redirect to the login activity
+                    // Redirect to the login activity if no user is logged in
                     startActivity(new Intent(SplashActivity.this, LoginActivity.class));
                 }
-                // We finish the SplashActivity so the user can't go back to it
+                // Close the splash activity to prevent the user from navigating back to it
                 finish();
             }
-        }, 2000);
+        }, 2000); // Delay time in milliseconds
     }
 }

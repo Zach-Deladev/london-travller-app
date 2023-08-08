@@ -20,12 +20,12 @@ import java.util.List;
 
 public class SelectGuideFragment extends Fragment {
 
-    private List<Guides> guides;
-    private RecyclerView recyclerView;
-    private String chosenDate;
-    private int chosenTicketNumber;
-    private double totalPrice;
-    private Tour selectedTour;
+    private List<Guides> guides; // List to hold the guides
+    private RecyclerView recyclerView; // RecyclerView to display the guides
+    private String chosenDate; // Selected date for the tour
+    private int chosenTicketNumber; // Number of tickets chosen
+    private double totalPrice; // Total price for the tour
+    private Tour selectedTour; // Selected tour details
 
     public SelectGuideFragment() {
         // Required empty public constructor
@@ -34,12 +34,12 @@ public class SelectGuideFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment and get the RecyclerView
+        // Inflate the layout for this fragment and initialize the RecyclerView
         View view = inflater.inflate(R.layout.fragment_select_guide2, container, false);
         recyclerView = view.findViewById(R.id.guide_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Get the arguments before returning the view
+        // Retrieve the arguments passed to the fragment, containing tour details and selection
         Bundle args = getArguments();
         if (args != null) {
             selectedTour = (Tour) args.getSerializable("selectedTour");
@@ -54,17 +54,19 @@ public class SelectGuideFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        fetchGuidesAndUpdateUI();
+        fetchGuidesAndUpdateUI(); // Fetch the guides and update the UI
     }
 
     private void fetchGuidesAndUpdateUI() {
-        // Fetch the guides from the database
+        // Fetch the guides from the database using a DAO (Data Access Object)
         GuidesDao guidesDao = GuidesDaoProvider.getInstance(getContext());
         guides = guidesDao.getAllGuides();
 
-        // Initialize your GuideAdapter
+        // Initialize the GuideAdapter with the fetched guides and other details
         GuideAdapter adapter = new GuideAdapter(getContext(), guides, chosenDate, chosenTicketNumber, totalPrice, selectedTour);
 
+        // Set the adapter to the RecyclerView
         recyclerView.setAdapter(adapter);
     }
 }
+
