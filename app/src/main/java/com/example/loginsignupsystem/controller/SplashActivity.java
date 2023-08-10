@@ -4,6 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.loginsignupsystem.R;
 import com.example.loginsignupsystem.model.DbHelper;
@@ -14,10 +19,20 @@ public class SplashActivity extends AppCompatActivity {
 
     private UsersDao usersDao;
 
+   ImageView travelers_logo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        travelers_logo = (ImageView) findViewById(R.id.travelers_logo);
+
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.scale);
+        travelers_logo.startAnimation(animation);
+
+        animation.setFillAfter(true);
+        animation.setDuration(3000);
+
 
         // Initialize the database helper and Users DAO.
         DbHelper dbHelper = new DbHelper(this);
