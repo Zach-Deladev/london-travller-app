@@ -75,11 +75,15 @@
 
         <Spinner
             android:id="@+id/date_spinner"
+            style="@style/Widget.AppCompat.Spinner.DropDown"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/datepicker"
-            tools:layout_editor_absoluteX="66dp" />
+            android:background="@color/black"
+            android:backgroundTint="#FFFFFF"
+            android:dropDownSelector="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/datepicker" />
 
         <TextView
             android:id="@+id/ticketpicker"

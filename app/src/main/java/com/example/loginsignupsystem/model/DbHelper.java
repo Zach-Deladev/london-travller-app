@@ -13,7 +13,7 @@ import com.example.loginsignupsystem.R;
 public class DbHelper extends SQLiteOpenHelper {
 
     // Database Version
-    public static final int dbVersion = 25; // Increment database version due to schema changes
+    public static final int dbVersion = 28; // Increment database version due to schema changes
 
     // Database Name
     public static final String dbName = "LoginSignupSystem";
@@ -108,7 +108,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         // Tour 1
         cv.put("title", "Bond Street");
-        cv.put("subtitle", "London's famous Bond Street is revered throughout the world for its wealth of elegant stores, exclusive brands, designer fashion, luxury goods, fine jewels, art and antiques.");
+        cv.put("subtitle", "London's famous Bond Street is revered throughout the world for its wealth of elegant stores and exclusive brands.");
         cv.put("description", "Bond Street in the West End of London links Piccadilly in the south to Oxford Street in the north. Since the 18th century the street has housed many prestigious and upmarket fashion retailers. \n" +
                 "\n" +
                 "The street was built on fields surrounding Clarendon House on Piccadilly, which were developed by Sir Thomas Bond. It was built up in the 1720s, and by the end of the 18th century was a popular place for the upper-class residents of Mayfair to socialise.");
@@ -118,7 +118,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         // Tour 2
         cv.put("title", "National Gallery");
-        cv.put("subtitle", "The National Gallery is an art museum in Trafalgar Square in the City of Westminster, in Central London, England. Founded in 1824, in Trafalgar Square since 1838, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900. ");
+        cv.put("subtitle", "The National Gallery is an art museum in Trafalgar Square in the City of Westminster, in Central London, England. Founded in 1824. ");
         cv.put("description", "The National Gallery is an art museum in Trafalgar Square in the City of Westminster, in Central London, England. Founded in 1824, in Trafalgar Square since 1838, it houses a collection of over 2,300 paintings dating from the mid-13th century to 1900.[note 1] The current Director of the National Gallery is Gabriele Finaldi.\n"
 
              );
@@ -128,7 +128,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         // Tour 2
         cv.put("title", "Tate Modern");
-        cv.put("subtitle", "Tate Modern is an art gallery located in London. It houses the United Kingdom's national collection of international modern and contemporary art, and forms part of the Tate group together with Tate Britain, Tate Liverpool and Tate St Ives.[2] It is located in the former Bankside Power Station, in the Bankside area of the London Borough of Southwark.");
+        cv.put("subtitle", "Tate Modern is an art gallery located in London. It houses the United Kingdom's national collection of international modern and contemporary art.");
         cv.put("description", "Tate Modern is an art gallery located in London. It houses the United Kingdom's national collection of international modern and contemporary art, and forms part of the Tate group together with Tate Britain, Tate Liverpool and Tate St Ives.[2] It is located in the former Bankside Power Station, in the Bankside area of the London Borough of Southwark.\n"
               );
         cv.put("category", "art");
@@ -137,7 +137,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
         // Tour 2
         cv.put("title", "Tower Bridge");
-        cv.put("subtitle", "Tower Bridge is a Grade I listed combined bascule and suspension bridge in London, built between 1886 and 1894, designed by Horace Jones and engineered by John Wolfe Barry with the help of Henry Marc Brunel. ");
+        cv.put("subtitle", "Tower Bridge is a Grade I listed combined bascule and suspension bridge in London, built between 1886 and 1894.");
         cv.put("description", "Tower Bridge is a Grade I listed combined bascule and suspension bridge in London, built between 1886 and 1894, designed by Horace Jones and engineered by John Wolfe Barry with the help of Henry Marc Brunel.[1] It crosses the River Thames close to the Tower of London and is one of five London bridges owned and maintained by the Bridge House Estates, a charitable trust founded in 1282. The bridge was constructed to give better access to the East End of London, which had expanded its commercial potential in the 19th century.");
         cv.put("category", "landmarks");
         cv.put("imageResource", R.drawable.towerbridge);

@@ -72,9 +72,11 @@ public class TourInfoFragment extends Fragment {
         tourDescriptionView.setText(currentTour.getDescription());
 
         // Handle read more/less functionality for the description
-        readMoreButton.setOnClickListener(v -> updateDescriptionText(tourDescriptionView, readMoreButton));
+
+        isDescriptionExpanded = true; // This will be toggled to false in the next line
         updateDescriptionText(tourDescriptionView, readMoreButton);
 
+        readMoreButton.setOnClickListener(v -> updateDescriptionText(tourDescriptionView, readMoreButton));
         // Populate date selection spinner
         List<String> dates = fetchDates();
         dates.add(0, "Date Selected: ");
@@ -141,16 +143,18 @@ public class TourInfoFragment extends Fragment {
         }
     }
 
+// Method to make read more button expand
     private void updateDescriptionText(TextView tourDescriptionView, TextView readMoreButton) {
-        // Toggle the expanded state of the tour description
         if (isDescriptionExpanded) {
-            tourDescriptionView.setMaxLines(Integer.MAX_VALUE);
-            readMoreButton.setText(R.string.read_less);
-        } else {
             tourDescriptionView.setMaxLines(3);
             readMoreButton.setText(R.string.read_more);
+        } else {
+            tourDescriptionView.setMaxLines(Integer.MAX_VALUE);
+            readMoreButton.setText(R.string.read_less);
         }
+        isDescriptionExpanded = !isDescriptionExpanded;
     }
+
 
     private List<String> fetchDates() {
         // Fetches the next 7 dates starting from today

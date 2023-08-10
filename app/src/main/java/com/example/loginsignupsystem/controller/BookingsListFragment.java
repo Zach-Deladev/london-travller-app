@@ -5,18 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
 import androidx.fragment.app.Fragment;
-
 import com.example.loginsignupsystem.R;
 import com.example.loginsignupsystem.model.Bookings;
 import com.example.loginsignupsystem.model.BookingsDao;
 import com.example.loginsignupsystem.model.BookingsDaoProvider;
 import com.example.loginsignupsystem.model.BookingsListAdapter;
-
 import java.util.List;
 
-public class BookingsListFragment extends Fragment {
+public class
+BookingsListFragment extends Fragment {
     private ListView listView;
     private BookingsDao bookingDao; // You'll need to define this interface
 

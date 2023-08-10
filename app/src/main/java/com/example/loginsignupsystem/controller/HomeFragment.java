@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
-    private TextView textView;
+
     private ImageView museums, landmarks, art, shopping;
 
     @Override
@@ -57,20 +57,9 @@ public class HomeFragment extends Fragment {
         art.setOnClickListener(v -> startTourListFragment("art"));
         shopping.setOnClickListener(v -> startTourListFragment("shopping"));
 
-        // Find TextView component in the layout
-        textView = view.findViewById(R.id.textView);
 
-        // Retrieve the username from the Intent
-        Intent intent = getActivity().getIntent();
-        String username = intent.getStringExtra("username");
 
-        if (username != null && !username.isEmpty()) {
-            // Capitalize the first character of the username
-            username = Character.toUpperCase(username.charAt(0)) + username.substring(1);
 
-            // Format the string to say "Hello, <username>!" and set it in the TextView
-            textView.setText(String.format("Hello, %s!", username));
-        }
 
 
 
